@@ -9,11 +9,6 @@ class CreateZoos < ActiveRecord::Migration[6.1]
       t.integer :assessment, null: false, default: ""
       t.string :address, null: false, default: ""
 
-      has_one_attached :image
-
-      has_many :animals, dependent: :destroy
-      belongs_to :user
-
       t.timestamps
     end
   end
