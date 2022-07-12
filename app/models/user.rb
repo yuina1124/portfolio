@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :zoos, dependent: :destroy
 
+  validates :email, presence: true
+  validates :name, presence: true
+  validates :birthday, presence: true
+
 end

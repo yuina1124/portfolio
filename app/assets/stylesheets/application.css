@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.kirin-image{
+  width: 50px;
+  background-color: orange;
+}

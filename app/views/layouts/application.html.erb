@@ -6,11 +6,34 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= link_to "logo", root_path %>
+
+    <% if user_signed_in? %>
+      <%= link_to "動物園一覧", zoos_path %>
+      <%= link_to "ユーザ登録", new_user_registration_path %>
+      <%= link_to "マイページ", user_path %>
+      <%= link_to "ログアウト", destroy_user_session_path %>
+    <% else %>
+      <%= link_to "動物園一覧", zoos_path %>
+      <%= link_to "ユーザ登録", new_user_registration_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
   </head>
 
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+    <%= image_tag 'キリンのフリー素材2', class: 'kirin-image'  %>
+    <%= image_tag 'ゾウのフリー素材9', class: 'zou-image'  %>
+    <%= image_tag 'カバのアイコン3', class: 'kaba-image'  %>
+    <%= image_tag '猿のフリー素材', class: 'saru-image'  %>
+    <%= image_tag 'うさぎ', class: 'usagi-image'  %>
+
+    <div class="text-right">ZOONAVI</div>
+  </footer>
 </html>
