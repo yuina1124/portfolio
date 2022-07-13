@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_12_151337) do
+ActiveRecord::Schema.define(version: 2022_07_13_122926) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,8 +43,13 @@ ActiveRecord::Schema.define(version: 2022_07_12_151337) do
   create_table "animals", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "introduction", default: "", null: false
+    t.integer "animal_id"
+    t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id", "tag_id"], name: "index_animals_on_animal_id_and_tag_id", unique: true
+    t.index ["animal_id"], name: "index_animals_on_animal_id"
+    t.index ["tag_id"], name: "index_animals_on_tag_id"
   end
 
   create_table "homes", force: :cascade do |t|
@@ -57,13 +62,18 @@ ActiveRecord::Schema.define(version: 2022_07_12_151337) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id", "tag_id"], name: "index_tag_animals_on_animal_id_and_tag_id", unique: true
     t.index ["animal_id"], name: "index_tag_animals_on_animal_id"
     t.index ["tag_id"], name: "index_tag_animals_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "animal_id", null: false
+    t.string "tag_name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id"], name: "index_tags_on_animal_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,19 +90,37 @@ ActiveRecord::Schema.define(version: 2022_07_12_151337) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "zoo_animals", force: :cascade do |t|
+    t.integer "animal_id", null: false
+    t.integer "zoo_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id", "zoo_id"], name: "index_zoo_animals_on_animal_id_and_zoo_id", unique: true
+    t.index ["animal_id"], name: "index_zoo_animals_on_animal_id"
+    t.index ["zoo_id"], name: "index_zoo_animals_on_zoo_id"
+  end
+
   create_table "zoos", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "favorite", default: "", null: false
-    t.integer "type", null: false
-    t.integer "many", null: false
+    t.integer "type"
+    t.integer "many"
     t.integer "assessment", null: false
     t.string "address", default: "", null: false
+    t.integer "users_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["users_id"], name: "index_zoos_on_users_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "animals", "animals"
+  add_foreign_key "animals", "tags"
   add_foreign_key "tag_animals", "animals"
   add_foreign_key "tag_animals", "tags"
+  add_foreign_key "tags", "animals"
+  add_foreign_key "zoo_animals", "animals"
+  add_foreign_key "zoo_animals", "zoos"
+  add_foreign_key "zoos", "users", column: "users_id"
 end

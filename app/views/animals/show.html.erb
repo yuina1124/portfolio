@@ -1,0 +1,4 @@
+<% @animal_tags.each do |tag| %>
+  <%= tag.name %>
+  <%= "(#{tag.animals.count})" %>
+<% end %>

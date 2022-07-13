@@ -7,7 +7,16 @@
 <h2></h2>
 <p></p>
 
-<%= form_with model: [@tags, @animals],  url: zoos_path, local: true do |f| %>
+<% @tags.each do |tag| %>
+  <%= list.name %>
+  <%= "(#{list.animals.count})" %>
+<% end %>
+
+<% @animals.each do |animal| %>
+  <i class="fas fa-tag"><%= animal.tags.map(&:name).join(',') %></i>
+<% end %>
+
+<% form_with model: [@tags, @animals],  url: zoos_path, local: true do |f| %>
   <%= f.text_field :tag_name, placeholder:"お気に入りの動物から動物園を探す", class: 'uk-input' %><br>
   <%= f.text_field :title, placeholder:"動物検索", class: 'uk-input' %>
   <%= f.submit "検索" %>

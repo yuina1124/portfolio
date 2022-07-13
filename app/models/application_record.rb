@@ -2,7 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
 
-  before_commit :configure_permitted_parameters, if: :devise_controller?
+#  before_commit :configure_permitted_parameters, if: :devise_controller?
 
   protected
 

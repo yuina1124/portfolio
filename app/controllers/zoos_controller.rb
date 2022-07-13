@@ -1,26 +1,29 @@
 class ZoosController < ApplicationController
 
+  def new
+    @zoo = Zoo.new
+  end
+
+  def create
+    @zoo = Zoo.new(zoo_params)
+
+    if @zoo.save!
+      flash[:notice] = "投稿完了"
+      redirect_to zoos_path
+    else
+      redirect_to new_zoo_path, alert: "投稿失敗"
+    end
+  end
+
   def index
     @tags = Tag.all
     @animals = Animal.all
   end
 
-  def create
-    @animal = Animal.new(@animal)
-    @animal.user_id = current_user.id
-    tag_list = params[:zoo][:name].split(',')
-    if @animal.save
-      @animal.save_tag(tag_list)
-      redirect_to user_path(current_user),notice:'投稿完了'
-    else
-      render:new
-    end
-  end
-
   private
 
   def zoo_params
-    params.require(:zoo).permit(:name, :favorite, :type, :many, :assessment, :address, :image)
+    params.require(:zoo).permit(:animal, :name, :favorite, :type, :many, :assessment, :address, :image, :zoo)
   end
 
 

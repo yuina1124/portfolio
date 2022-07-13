@@ -2,7 +2,7 @@ class Tag < ApplicationRecord
 
   has_many :animals, through: :tag_animals
   has_many :zoos, through: :animals
-  has_many :tag_animals, dependent: :destroy
+  has_many :tag_animals, dependent: :destroy, foreign_key: 'tag_id'
 
   validates :name, uniqueness: true, presence: true
 
