@@ -1,13 +1,17 @@
 class AnimalsController < ApplicationController
 
+  def new
+    @animal = Animal.new
+  end
+
   def create
     @animal = Animal.new(animal_params)
-    tag_list = params[:animal][:name].split(',')
+    # binding.pry
+
     if @animal.save
-      @animal.save_tag(tag_list)
-      redirect_to zoos_path(@animal), notice:'投稿完了'
+      redirect_to zoos_path, notice:'投稿完了'
     else
-      redirect_to zoos_path(@animal), notice: '投稿失敗'
+      redirect_to new_animal_path(@animal), notice: '投稿失敗'
     end
   end
 
@@ -33,7 +37,7 @@ class AnimalsController < ApplicationController
   private
 
   def animal_params
-    params.require(:animal).permit(:name, :introduction, :image, :tag)
+    params.require(:animal).permit(:name, :introduction, :image)
   end
 
 end

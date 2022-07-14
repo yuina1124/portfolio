@@ -2,12 +2,11 @@ class Animal < ApplicationRecord
 
   has_one_attached :image
 
-  has_many :tag_animals, dependent: :destroy
-  has_many :tags, through: :tag_animals
-  belongs_to :zoo
-  belongs_to :tag
+  has_many :zoo_animals, dependent: :destroy#, foreign_key: 'animal_id'
+  has_many :zoos, through: :zoo_animals
+  # belongs_to :zoo
 
-  validates :name, presence: true
+  validates :name, uniqueness: true, presence: true
   validates :introduction, presence: true
 
   # def self.animal_search(search)

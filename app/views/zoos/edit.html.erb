@@ -1,0 +1,49 @@
+<h2>動物園を編集</h2>
+<p>たくさんの動物園に行って自分だけの図鑑をつくろう</p>
+
+<%= form_with(model: @zoo, url:zoo_path(@zoo), method: :patch) do |f| %>
+  <div class="field">
+    <%= f.label :動物園画像 %><br />
+  <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div class= "field">
+    <%= f.label :いる動物を追加 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :動物園名 %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :この動物園のナンバーワン %><br />
+    <%= f.text_field :favorite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :場所 %><br />
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :五段階評価 %><br />
+    <%= f.text_field :assessment %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規登録" %>
+  </div>
+
+  <!--タグ機能-->
+  <div class="field">
+    <%= f.label "タグ (,で区切ると複数タグ登録できます)" %>
+    <%= f.text_field :name, value: @animal_list, class: "form-control" %>
+  </div>
+
+  <div class="actions" style="margin:20px 0;">
+    <%= f.submit "投稿", class:"btn btn-outline-primary btn-block" %>
+  </div>
+
+<% end %>
+

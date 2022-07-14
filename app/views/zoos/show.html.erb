@@ -1,0 +1,41 @@
+<h2><%= @zoo.name %></h2>
+
+<% if @zoo.image.present? %>
+  <%= image_tag @zoo.image %>
+<% else %>
+  <%= image_tag 'noimage.jpg' %>
+<% end %>
+
+<div class="field">
+  人気動物
+  <%= @zoo.favorite %>
+</div>
+
+<div class="field">
+  いる動物
+</div>
+
+<div class="field">
+  何種類
+
+</div>
+
+<div class="field">
+  場所
+  <%= @zoo.address %>
+</div>
+
+<div class="field">
+  五段階評価
+  <%= @zoo.assessment %>
+</div>
+
+<div class="field">
+  投稿者名
+
+</div>
+
+<% @zoo_animals.each do |animal| %>
+  <%= animal.name %>
+  <%="(#{animal.zoos.count})" %>
+<% end %>

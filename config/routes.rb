@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   root to: "animals#index"
   resources :users, only: [:show, :edit, :update]
   resources :zoos, only: [:create, :new, :show, :edit, :update, :index]
+  post "/zoos/make" => "zoo#make"
   resources :animals, only: [:create, :new, :show, :edit, :update, :index]
   resources :animals do
     resources :tags, only: [:create, :destroy]
   end
   resources :tag_animals, only: [:create]
+
+
 
 end

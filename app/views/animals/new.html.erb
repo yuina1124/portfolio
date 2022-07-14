@@ -1,0 +1,22 @@
+<h2>動物登録</h2>
+
+<%= form_with(model: @animal, url:animals_path, method: :post) do |f| %>
+  <div class="field">
+    <%= f.label :動物画像 %><br />
+  <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :動物名 %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :紹介 %><br />
+    <%= f.text_field :introduction %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>

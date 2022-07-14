@@ -2,8 +2,8 @@ class CreateZooAnimals < ActiveRecord::Migration[6.1]
   def change
     create_table :zoo_animals do |t|
 
-      t.references :animal, null: false, foreign_key: true
-      t.references :zoo, null: false, foreign_key: true
+      t.references :animal, foreign_key: true
+      t.references :zoo, foreign_key: true
 
       t.timestamps
     end
